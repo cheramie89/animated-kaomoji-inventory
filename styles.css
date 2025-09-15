@@ -62,8 +62,8 @@ header p {
 }
 
 .sticker-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
 }
 
 .sticker-card::before {
@@ -646,13 +646,16 @@ footer {
     justify-content: center;
     flex-wrap: wrap;
     opacity: 0;
-    transform: translateY(10px);
-    transition: all 0.3s ease;
+    transform: translateY(5px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    pointer-events: none;
 }
 
 .sticker-card:hover .export-controls {
     opacity: 1;
     transform: translateY(0);
+    pointer-events: auto;
+    transition-delay: 0.1s;
 }
 
 .export-btn {
@@ -669,12 +672,13 @@ footer {
 }
 
 .export-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(102, 126, 234, 0.4);
 }
 
 .export-btn:active {
     transform: translateY(0);
+    transition: all 0.1s ease;
 }
 
 .export-btn.gif-export {
