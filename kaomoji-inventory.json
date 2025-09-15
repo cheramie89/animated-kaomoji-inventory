@@ -1,0 +1,130 @@
+{
+  "kaomoji": [
+    {
+      "id": "shrug",
+      "symbol": "¯\\_(ツ)_/¯",
+      "name": "Shrug",
+      "description": "I don't know / Whatever",
+      "animation": "shrug",
+      "category": "expressions",
+      "tags": ["shrug", "dunno", "whatever", "indifferent"]
+    },
+    {
+      "id": "happy",
+      "symbol": "(◕‿◕)",
+      "name": "Happy Face",
+      "description": "Cheerful and positive",
+      "animation": "bounce",
+      "category": "emotions",
+      "tags": ["happy", "cheerful", "positive", "smile"]
+    },
+    {
+      "id": "excited",
+      "symbol": "\\(^o^)/",
+      "name": "Excited",
+      "description": "Yay! So excited!",
+      "animation": "wiggle",
+      "category": "emotions",
+      "tags": ["excited", "yay", "celebration", "happy"]
+    },
+    {
+      "id": "love",
+      "symbol": "(♥‿♥)",
+      "name": "Love Eyes",
+      "description": "Heart eyes with love",
+      "animation": "love",
+      "category": "emotions",
+      "tags": ["love", "heart", "affection", "cute"]
+    },
+    {
+      "id": "thinking",
+      "symbol": "(¬_¬)",
+      "name": "Thinking",
+      "description": "Hmm, thinking...",
+      "animation": "shrug",
+      "category": "expressions",
+      "tags": ["thinking", "contemplating", "suspicious", "hmm"]
+    },
+    {
+      "id": "wink",
+      "symbol": "(^_-)",
+      "name": "Wink",
+      "description": "Playful wink",
+      "animation": "wink",
+      "category": "expressions",
+      "tags": ["wink", "playful", "flirty", "cute"]
+    },
+    {
+      "id": "joy",
+      "symbol": "(＾▽＾)",
+      "name": "Joyful",
+      "description": "Pure joy and happiness",
+      "animation": "joy",
+      "category": "emotions",
+      "tags": ["joy", "happy", "cheerful", "delighted", "smile"]
+    },
+    {
+      "id": "crying",
+      "symbol": "(T_T)",
+      "name": "Crying",
+      "description": "Tears of sadness",
+      "animation": "cry",
+      "category": "emotions",
+      "tags": ["cry", "sad", "tears", "upset", "emotional"]
+    },
+    {
+      "id": "celebrate",
+      "symbol": "ヽ(•‿•)ノ",
+      "name": "Celebration",
+      "description": "Hands up in celebration!",
+      "animation": "celebrate",
+      "category": "actions",
+      "tags": ["celebrate", "victory", "yay", "success", "party"]
+    },
+    {
+      "id": "tableflip",
+      "symbol": "(╯°□°)╯︵ ┻━┻",
+      "name": "Table Flip",
+      "description": "Flipping tables in frustration",
+      "animation": "tableflip",
+      "category": "actions",
+      "tags": ["tableflip", "frustrated", "angry", "rage", "meme"]
+    },
+    {
+      "id": "tablefix",
+      "symbol": "┬─┬ ノ( ゜-゜ノ)",
+      "name": "Table Fix",
+      "description": "Putting the table back nicely",
+      "animation": "tablefix",
+      "category": "actions",
+      "tags": ["tablefix", "calm", "restore", "peaceful", "polite"]
+    },
+    {
+      "id": "dance",
+      "symbol": "♪┏(・o･)┛♪ ┗( ･o･)┓♪",
+      "name": "Dancing",
+      "description": "Dancing to the beat!",
+      "animation": "dance",
+      "category": "actions",
+      "tags": ["dance", "music", "rhythm", "party", "fun"]
+    },
+    {
+      "id": "hug",
+      "symbol": "(づ｡◕‿‿◕｡)づ",
+      "name": "Hug",
+      "description": "Giving warm hugs",
+      "animation": "hug",
+      "category": "emotions",
+      "tags": ["hug", "love", "affection", "cuddle", "warm"]
+    },
+    {
+      "id": "bear",
+      "symbol": "ʕ•ᴥ•ʔ",
+      "name": "Bear Face",
+      "description": "Cute bear expression",
+      "animation": "bear",
+      "category": "animals",
+      "tags": ["bear", "cute", "animal", "kawaii", "adorable"]
+    }
+  ]
+}

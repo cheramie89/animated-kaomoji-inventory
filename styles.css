@@ -1,0 +1,814 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+/* Header styles */
+header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+header p {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+/* Sticker grid */
+.sticker-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+/* Individual sticker card */
+.sticker-card {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: visible;
+}
+
+.sticker-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.sticker-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: left 0.5s;
+}
+
+.sticker-card:hover::before {
+    left: 100%;
+}
+
+/* Kaomoji display */
+.kaomoji {
+    font-size: 3rem;
+    font-family: 'Courier New', monospace;
+    margin-bottom: 15px;
+    display: block;
+    line-height: 1.2;
+    user-select: none;
+    white-space: nowrap;
+    overflow: visible;
+}
+
+.sticker-name {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 5px;
+    font-size: 1.1rem;
+}
+
+.sticker-description {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Shrug animation - special structure for hand movements */
+.kaomoji.shrug {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+}
+
+.shrug-left-hand,
+.shrug-right-hand {
+    display: inline-block;
+    animation: shrugHands 1.5s ease-in-out infinite;
+    transform-origin: bottom center;
+}
+
+.shrug-face {
+    display: inline-block;
+    animation: shrugFace 3s ease-in-out infinite;
+}
+
+.shrug-right-hand {
+    animation-delay: 0.1s; /* Slight offset for more natural movement */
+}
+
+@keyframes shrugHands {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    30% {
+        transform: translateY(-12px) rotate(3deg);
+    }
+    70% {
+        transform: translateY(-10px) rotate(-1deg);
+    }
+}
+
+@keyframes shrugFace {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* Love eyes animation - special structure for heart animations */
+.kaomoji.love {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+}
+
+.love-bracket,
+.love-smile {
+    display: inline-block;
+    /* Static - no animation for maximum heart contrast */
+}
+
+.love-left-heart,
+.love-right-heart {
+    display: inline-block;
+    animation: loveHearts 1.5s ease-in-out infinite;
+    transform-origin: center;
+}
+
+.love-right-heart {
+    /* Synchronized with left heart - no delay */
+}
+
+@keyframes loveHearts {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.5);
+    }
+}
+
+/* loveBase animation removed - base elements are now static */
+
+/* Wink animation - special structure for winking eye */
+.kaomoji.wink {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+}
+
+.wink-bracket,
+.wink-nose,
+.wink-closed {
+    display: inline-block;
+    /* Static - no animation for maximum wink contrast */
+}
+
+.wink-eye {
+    display: inline-block;
+    animation: winkEye 2s ease-in-out infinite;
+    transform-origin: center;
+}
+
+@keyframes winkEye {
+    0%, 85% {
+        transform: scaleY(1);
+    }
+    90%, 95% {
+        transform: scaleY(0.1);
+    }
+    100% {
+        transform: scaleY(1);
+    }
+}
+
+/* Cry animation - special structure for flowing tears */
+.kaomoji.cry {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+}
+
+.cry-bracket,
+.cry-nose {
+    display: inline-block;
+    /* Static - no animation for maximum tear contrast */
+}
+
+.cry-left-tear,
+.cry-right-tear {
+    display: inline-block;
+    animation: tearFlow 2.5s ease-in-out infinite;
+    transform-origin: top center;
+}
+
+.cry-right-tear {
+    animation-delay: 0.3s; /* Slight offset for more natural crying */
+}
+
+@keyframes tearFlow {
+    0%, 100% {
+        transform: translateY(0px) scaleY(1);
+        opacity: 1;
+    }
+    50% {
+        transform: translateY(3px) scaleY(1.2);
+        opacity: 0.8;
+    }
+}
+
+/* Bounce animation */
+.kaomoji.bounce {
+    animation: bounce 1.5s ease-in-out infinite;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Wiggle animation */
+.kaomoji.wiggle {
+    animation: wiggle 1s ease-in-out infinite;
+}
+
+@keyframes wiggle {
+    0%, 100% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(-3deg);
+    }
+    75% {
+        transform: rotate(3deg);
+    }
+}
+
+/* Pulse animation */
+.kaomoji.pulse {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+    }
+}
+
+/* Joy animation */
+.kaomoji.joy {
+    animation: joy 1.2s ease-in-out infinite;
+}
+
+@keyframes joy {
+    0%, 100% {
+        transform: scale(1) rotate(0deg);
+    }
+    25% {
+        transform: scale(1.15) rotate(-2deg);
+    }
+    50% {
+        transform: scale(1.25) rotate(0deg);
+    }
+    75% {
+        transform: scale(1.15) rotate(2deg);
+    }
+}
+
+/* Cry animation */
+.kaomoji.cry {
+    animation: cry 2s ease-in-out infinite;
+}
+
+@keyframes cry {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    25% {
+        transform: translateY(2px) rotate(-0.5deg);
+    }
+    50% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    75% {
+        transform: translateY(2px) rotate(0.5deg);
+    }
+}
+
+/* Celebrate animation */
+.kaomoji.celebrate {
+    animation: celebrate 1.5s ease-in-out infinite;
+}
+
+@keyframes celebrate {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg) scale(1);
+    }
+    25% {
+        transform: translateY(-15px) rotate(-10deg) scale(1.1);
+    }
+    50% {
+        transform: translateY(-5px) rotate(0deg) scale(1.05);
+    }
+    75% {
+        transform: translateY(-15px) rotate(10deg) scale(1.1);
+    }
+}
+
+/* Table flip animation */
+.kaomoji.tableflip {
+    animation: tableflip 2s ease-in-out infinite;
+}
+
+@keyframes tableflip {
+    0%, 100% {
+        transform: rotate(0deg) translateX(0px);
+    }
+    25% {
+        transform: rotate(-5deg) translateX(-5px);
+    }
+    50% {
+        transform: rotate(15deg) translateX(10px);
+    }
+    75% {
+        transform: rotate(-2deg) translateX(-2px);
+    }
+}
+
+/* Table fix animation */
+.kaomoji.tablefix {
+    animation: tablefix 3s ease-in-out infinite;
+}
+
+@keyframes tablefix {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    30% {
+        transform: translateY(-5px) rotate(-1deg);
+    }
+    60% {
+        transform: translateY(2px) rotate(1deg);
+    }
+    80% {
+        transform: translateY(-2px) rotate(0deg);
+    }
+}
+
+/* Dance animation */
+.kaomoji.dance {
+    animation: dance 1s ease-in-out infinite;
+}
+
+@keyframes dance {
+    0%, 100% {
+        transform: translateX(0px) rotate(0deg);
+    }
+    25% {
+        transform: translateX(-8px) rotate(-5deg);
+    }
+    50% {
+        transform: translateX(0px) rotate(0deg);
+    }
+    75% {
+        transform: translateX(8px) rotate(5deg);
+    }
+}
+
+/* Hug animation */
+.kaomoji.hug {
+    animation: hug 2.5s ease-in-out infinite;
+}
+
+@keyframes hug {
+    0%, 100% {
+        transform: scale(1) translateY(0px);
+    }
+    50% {
+        transform: scale(1.1) translateY(-5px);
+    }
+}
+
+/* Bear animation */
+.kaomoji.bear {
+    animation: bear 1.8s ease-in-out infinite;
+}
+
+@keyframes bear {
+    0%, 100% {
+        transform: rotate(0deg) scale(1);
+    }
+    25% {
+        transform: rotate(-2deg) scale(1.05);
+    }
+    50% {
+        transform: rotate(0deg) scale(1.1);
+    }
+    75% {
+        transform: rotate(2deg) scale(1.05);
+    }
+}
+
+/* Joy animation */
+.kaomoji.joy {
+    animation: joy 1.2s ease-in-out infinite;
+}
+
+@keyframes joy {
+    0%, 100% {
+        transform: scale(1) rotate(0deg);
+    }
+    25% {
+        transform: scale(1.15) rotate(-2deg);
+    }
+    50% {
+        transform: scale(1.25) rotate(0deg);
+    }
+    75% {
+        transform: scale(1.15) rotate(2deg);
+    }
+}
+
+/* Cry animation */
+.kaomoji.cry {
+    animation: cry 2s ease-in-out infinite;
+}
+
+@keyframes cry {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    25% {
+        transform: translateY(2px) rotate(-0.5deg);
+    }
+    50% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    75% {
+        transform: translateY(2px) rotate(0.5deg);
+    }
+}
+
+/* Celebrate animation */
+.kaomoji.celebrate {
+    animation: celebrate 1.5s ease-in-out infinite;
+}
+
+@keyframes celebrate {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg) scale(1);
+    }
+    25% {
+        transform: translateY(-15px) rotate(-10deg) scale(1.1);
+    }
+    50% {
+        transform: translateY(-5px) rotate(0deg) scale(1.05);
+    }
+    75% {
+        transform: translateY(-15px) rotate(10deg) scale(1.1);
+    }
+}
+
+/* Table flip animation */
+.kaomoji.tableflip {
+    animation: tableflip 2s ease-in-out infinite;
+}
+
+@keyframes tableflip {
+    0%, 100% {
+        transform: rotate(0deg) translateX(0px);
+    }
+    25% {
+        transform: rotate(-5deg) translateX(-5px);
+    }
+    50% {
+        transform: rotate(15deg) translateX(10px);
+    }
+    75% {
+        transform: rotate(-2deg) translateX(-2px);
+    }
+}
+
+/* Table fix animation */
+.kaomoji.tablefix {
+    animation: tablefix 3s ease-in-out infinite;
+}
+
+@keyframes tablefix {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    30% {
+        transform: translateY(-5px) rotate(-1deg);
+    }
+    60% {
+        transform: translateY(2px) rotate(1deg);
+    }
+    80% {
+        transform: translateY(-2px) rotate(0deg);
+    }
+}
+
+/* Dance animation */
+.kaomoji.dance {
+    animation: dance 1s ease-in-out infinite;
+}
+
+@keyframes dance {
+    0%, 100% {
+        transform: translateX(0px) rotate(0deg);
+    }
+    25% {
+        transform: translateX(-8px) rotate(-5deg);
+    }
+    50% {
+        transform: translateX(0px) rotate(0deg);
+    }
+    75% {
+        transform: translateX(8px) rotate(5deg);
+    }
+}
+
+/* Hug animation */
+.kaomoji.hug {
+    animation: hug 2.5s ease-in-out infinite;
+}
+
+@keyframes hug {
+    0%, 100% {
+        transform: scale(1) translateY(0px);
+    }
+    50% {
+        transform: scale(1.1) translateY(-5px);
+    }
+}
+
+/* Bear animation */
+.kaomoji.bear {
+    animation: bear 1.8s ease-in-out infinite;
+}
+
+@keyframes bear {
+    0%, 100% {
+        transform: rotate(0deg) scale(1);
+    }
+    25% {
+        transform: rotate(-2deg) scale(1.05);
+    }
+    50% {
+        transform: rotate(0deg) scale(1.1);
+    }
+    75% {
+        transform: rotate(2deg) scale(1.05);
+    }
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    color: #666;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+/* Copy feedback */
+.copy-feedback {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+}
+
+.copy-feedback.show {
+    transform: translateX(0);
+}
+
+/* Export controls */
+.export-controls {
+    margin-top: 15px;
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+}
+
+.sticker-card:hover .export-controls {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.export-btn {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+.export-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.export-btn:active {
+    transform: translateY(0);
+}
+
+.export-btn.gif-export {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.export-btn.html-export {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.export-btn.code-export {
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+}
+
+/* Export modal */
+.export-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+}
+
+.export-modal.show {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.export-modal-content {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    max-width: 500px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.export-modal h3 {
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+}
+
+.export-modal .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #666;
+}
+
+.export-modal textarea {
+    width: 100%;
+    height: 200px;
+    border: 2px solid #eee;
+    border-radius: 10px;
+    padding: 15px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    resize: vertical;
+}
+
+.export-modal .download-btn {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.export-modal .download-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+/* Loading indicator */
+.loading-indicator {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #ffffff40;
+    border-top: 2px solid #ffffff;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin-left: 5px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+        margin: 10px;
+    }
+    
+    header h1 {
+        font-size: 2rem;
+    }
+    
+    .sticker-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 15px;
+    }
+    
+    .kaomoji {
+        font-size: 2.5rem;
+    }
+    
+    .export-controls {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    .export-btn {
+        font-size: 0.7rem;
+        padding: 4px 8px;
+    }
+}
