@@ -43,8 +43,8 @@ header p {
 /* Sticker grid */
 .sticker-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 30px;
     margin-bottom: 30px;
 }
 
@@ -58,12 +58,24 @@ header p {
     transition: all 0.3s ease;
     cursor: pointer;
     position: relative;
-    overflow: visible;
+    overflow: hidden; /* Ensure content stays within bounds */
+    min-height: 240px; /* Fixed height for consistent layout */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .sticker-card:hover {
     transform: translateY(-3px);
     box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+}
+
+.kaomoji-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .sticker-card::before {
@@ -640,22 +652,22 @@ footer {
 
 /* Export controls */
 .export-controls {
-    margin-top: 15px;
+    margin-top: 10px;
     display: flex;
     gap: 8px;
     justify-content: center;
     flex-wrap: wrap;
     opacity: 0;
-    transform: translateY(5px);
-    transition: opacity 0.2s ease, transform 0.2s ease;
-    pointer-events: none;
+    transition: opacity 0.2s ease;
+    pointer-events: auto;
+    padding: 5px;
+    height: 32px; /* Fixed height to prevent layout shift */
+    align-items: center;
 }
 
-.sticker-card:hover .export-controls {
+.sticker-card:hover .export-controls,
+.export-controls:hover {
     opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-    transition-delay: 0.1s;
 }
 
 .export-btn {
@@ -672,7 +684,7 @@ footer {
 }
 
 .export-btn:hover {
-    transform: translateY(-1px);
+    transform: scale(1.05);
     box-shadow: 0 3px 8px rgba(102, 126, 234, 0.4);
 }
 

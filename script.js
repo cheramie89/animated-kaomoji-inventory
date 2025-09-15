@@ -92,9 +92,11 @@ class KaomojiInventory {
         }
         
         card.innerHTML = `
-            ${kaomojiHtml}
-            <div class="sticker-name">${kaomoji.name}</div>
-            <div class="sticker-description">${kaomoji.description}</div>
+            <div class="kaomoji-content">
+                ${kaomojiHtml}
+                <div class="sticker-name">${kaomoji.name}</div>
+                <div class="sticker-description">${kaomoji.description}</div>
+            </div>
             <div class="export-controls">
                 <button class="export-btn webp-export" onclick="exportAsWebP('${kaomoji.id}')">WebP</button>
                 <button class="export-btn html-export" onclick="exportAsHtml('${kaomoji.id}')">HTML</button>
