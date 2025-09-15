@@ -96,7 +96,7 @@ class KaomojiInventory {
             <div class="sticker-name">${kaomoji.name}</div>
             <div class="sticker-description">${kaomoji.description}</div>
             <div class="export-controls">
-                <button class="export-btn gif-export" onclick="exportAsGif('${kaomoji.id}')">GIF</button>
+                <button class="export-btn webp-export" onclick="exportAsWebP('${kaomoji.id}')">WebP</button>
                 <button class="export-btn html-export" onclick="exportAsHtml('${kaomoji.id}')">HTML</button>
                 <button class="export-btn code-export" onclick="exportAsCode('${kaomoji.id}')">Code</button>
             </div>
@@ -311,7 +311,8 @@ class KaomojiInventory {
 let kaomojiInventoryInstance;
 
 // GIF Export functionality
-async function exportAsGif(kaomojiId) {
+// WebP Export functionality
+async function exportAsWebP(kaomojiId) {
     const kaomoji = kaomojiInventoryInstance.kaomoji.find(k => k.id === kaomojiId);
     if (!kaomoji) return;
 
@@ -319,95 +320,137 @@ async function exportAsGif(kaomojiId) {
     const title = document.getElementById('exportModalTitle');
     const body = document.getElementById('exportModalBody');
     
-    title.textContent = `Export ${kaomoji.name} as GIF`;
+    title.textContent = `Export ${kaomoji.name} as WebP`;
+    
     body.innerHTML = `
-        <p>Creating animated GIF... <span class="loading-indicator"></span></p>
-        <p style="font-size: 0.9rem; color: #666; margin-top: 10px;">
-            This may take a few seconds to capture the animation frames.
+        <p style="color: #f39c12; text-align: center;">
+            🖼️ Creating WebP image...
+        </p>
+        <p style="font-size: 0.9rem; color: #666; text-align: center; margin-top: 10px;">
+            WebP format: smaller file size, better quality!
         </p>
     `;
     
     modal.classList.add('show');
     
+    setTimeout(() => {
+        createWebPImage(kaomoji, body);
+    }, 500);
+}
+
+// Create WebP image for export
+function createWebPImage(kaomoji, bodyElement) {
     try {
-        // Create a temporary container for recording
-        const recordContainer = document.createElement('div');
-        recordContainer.style.position = 'absolute';
-        recordContainer.style.left = '-9999px';
-        recordContainer.style.background = 'white';
-        recordContainer.style.padding = '20px';
-        recordContainer.style.fontSize = '3rem';
-        recordContainer.style.fontFamily = 'Courier New, monospace';
-        document.body.appendChild(recordContainer);
-        
-        // Clone the kaomoji element
-        const originalElement = document.querySelector(`[data-kaomoji-id="${kaomojiId}"] .kaomoji`);
-        const clonedElement = originalElement.cloneNode(true);
-        recordContainer.appendChild(clonedElement);
-        
-        // Setup GIF creation
-        const gif = new GIF({
-            workers: 2,
-            quality: 10,
-            width: 200,
-            height: 100,
-            background: '#FFFFFF'
-        });
-        
-        // Create canvas for recording frames
+        // Create canvas for WebP image
         const canvas = document.createElement('canvas');
-        canvas.width = 200;
-        canvas.height = 100;
+        canvas.width = 500;
+        canvas.height = 250;
         const ctx = canvas.getContext('2d');
         
-        // Record frames
-        const frameCount = 30;
-        const animationDuration = kaomoji.animation === 'shrug' ? 1500 : 2000;
+        // Set up canvas with modern gradient background
+        const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+        gradient.addColorStop(0, '#667eea');
+        gradient.addColorStop(0.5, '#764ba2');
+        gradient.addColorStop(1, '#667eea');
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
         
-        for (let i = 0; i < frameCount; i++) {
-            await new Promise(resolve => {
-                setTimeout(async () => {
-                    // Clear canvas
-                    ctx.fillStyle = '#FFFFFF';
-                    ctx.fillRect(0, 0, canvas.width, canvas.height);
-                    
-                    // Draw kaomoji text
-                    ctx.fillStyle = '#000000';
-                    ctx.font = '3rem Courier New, monospace';
-                    ctx.textAlign = 'center';
-                    ctx.textBaseline = 'middle';
-                    ctx.fillText(kaomoji.symbol, canvas.width / 2, canvas.height / 2);
-                    
-                    // Add frame to GIF
-                    gif.addFrame(canvas, { delay: animationDuration / frameCount });
-                    resolve();
-                }, (animationDuration / frameCount) * i);
-            });
+        // Add modern geometric pattern
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.08)';
+        for (let i = 0; i < canvas.width; i += 30) {
+            for (let j = 0; j < canvas.height; j += 30) {
+                if ((i + j) % 60 === 0) {
+                    ctx.beginPath();
+                    ctx.arc(i + 15, j + 15, 8, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
         }
         
-        // Clean up
-        document.body.removeChild(recordContainer);
+        // Draw the kaomoji with enhanced styling
+        ctx.fillStyle = '#FFFFFF';
+        ctx.font = 'bold 72px Courier New, monospace';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.4)';
+        ctx.shadowOffsetX = 3;
+        ctx.shadowOffsetY = 3;
+        ctx.shadowBlur = 6;
+        ctx.fillText(kaomoji.symbol, canvas.width / 2, canvas.height / 2 - 15);
         
-        // Render GIF
-        gif.on('finished', function(blob) {
-            const url = URL.createObjectURL(blob);
-            body.innerHTML = `
-                <p style="text-align: center; margin-bottom: 15px;">
-                    <img src="${url}" alt="${kaomoji.name} GIF" style="max-width: 200px; border: 2px solid #eee; border-radius: 10px;">
-                </p>
-                <button class="download-btn" onclick="downloadFile('${url}', '${kaomoji.name.toLowerCase()}_kaomoji.gif')">
-                    Download GIF
-                </button>
-            `;
-        });
+        // Add enhanced label
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
+        ctx.shadowOffsetX = 1;
+        ctx.shadowOffsetY = 1;
+        ctx.shadowBlur = 3;
+        ctx.font = 'bold 22px Arial, sans-serif';
+        ctx.fillText(kaomoji.name, canvas.width / 2, canvas.height / 2 + 70);
         
-        gif.render();
+        // Add small category badge
+        ctx.font = '14px Arial, sans-serif';
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+        ctx.fillText(kaomoji.category.toUpperCase(), canvas.width / 2, canvas.height / 2 + 95);
+        
+        // Check if browser supports WebP
+        const testCanvas = document.createElement('canvas');
+        const supportsWebP = testCanvas.toDataURL('image/webp').indexOf('data:image/webp') === 0;
+        
+        if (supportsWebP) {
+            // Convert to WebP with high quality
+            canvas.toBlob(function(blob) {
+                const url = URL.createObjectURL(blob);
+                const fileSize = (blob.size / 1024).toFixed(1);
+                bodyElement.innerHTML = `
+                    <p style="text-align: center; margin-bottom: 15px;">
+                        <img src="${url}" alt="${kaomoji.name} WebP" style="max-width: 350px; border: 2px solid #eee; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                    </p>
+                    <p style="font-size: 0.9rem; color: #666; text-align: center; margin-bottom: 15px;">
+                        ${kaomoji.name} • WebP format • ${fileSize}KB
+                    </p>
+                    <p style="font-size: 0.8rem; color: #4CAF50; text-align: center; margin-bottom: 15px;">
+                        ✨ WebP: 25-35% smaller than PNG with better quality!
+                    </p>
+                    <button class="download-btn" onclick="downloadFile('${url}', '${kaomoji.name.toLowerCase().replace(/\s+/g, '_')}_kaomoji.webp')">
+                        Download WebP Image
+                    </button>
+                    <p style="font-size: 0.8rem; color: #999; text-align: center; margin-top: 10px;">
+                        💡 For the full animation, try the HTML export!
+                    </p>
+                `;
+            }, 'image/webp', 0.92);
+        } else {
+            // Fallback to PNG if WebP is not supported
+            canvas.toBlob(function(blob) {
+                const url = URL.createObjectURL(blob);
+                const fileSize = (blob.size / 1024).toFixed(1);
+                bodyElement.innerHTML = `
+                    <p style="text-align: center; margin-bottom: 15px;">
+                        <img src="${url}" alt="${kaomoji.name} PNG" style="max-width: 350px; border: 2px solid #eee; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                    </p>
+                    <p style="font-size: 0.9rem; color: #666; text-align: center; margin-bottom: 15px;">
+                        ${kaomoji.name} • PNG format • ${fileSize}KB
+                    </p>
+                    <p style="font-size: 0.8rem; color: #f39c12; text-align: center; margin-bottom: 15px;">
+                        ⚠️ WebP not supported in this browser, using PNG instead
+                    </p>
+                    <button class="download-btn" onclick="downloadFile('${url}', '${kaomoji.name.toLowerCase().replace(/\s+/g, '_')}_kaomoji.png')">
+                        Download PNG Image
+                    </button>
+                    <p style="font-size: 0.8rem; color: #999; text-align: center; margin-top: 10px;">
+                        💡 For the full animation, try the HTML export!
+                    </p>
+                `;
+            }, 'image/png', 0.95);
+        }
         
     } catch (error) {
-        console.error('GIF export failed:', error);
-        body.innerHTML = `
+        console.error('WebP image creation failed:', error);
+        bodyElement.innerHTML = `
             <p style="color: #ff6b6b; text-align: center;">
-                ⚠️ Failed to create GIF. Try the HTML or Code export instead.
+                ⚠️ Image creation failed. Try the HTML or Code export instead.
+            </p>
+            <p style="font-size: 0.9rem; color: #666; text-align: center; margin: 10px 0;">
+                The <strong>HTML export</strong> includes the full CSS animation!
             </p>
             <button class="download-btn" onclick="closeExportModal()">Close</button>
         `;

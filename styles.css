@@ -681,8 +681,8 @@ footer {
     transition: all 0.1s ease;
 }
 
-.export-btn.gif-export {
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+.export-btn.webp-export {
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
 }
 
 .export-btn.html-export {
